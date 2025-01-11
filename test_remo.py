@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 import pytest
-from romulo_colab.remo_core import similitud_coseno, extraer_palabras_clave, analizar_texto
+from romulo_colab.remo_core import similitud_coseno, extraer_palabras_clave, analizar_texto, KeywordExtractionError
 from romulo_colab.memoria import Memoria
 from romulo_colab.internet_utils import buscar_en_internet
 
@@ -40,6 +40,10 @@ class TestRemo(unittest.TestCase):
       palabras_clave = extraer_palabras_clave(texto, use_embeddings=False)
       self.assertIsInstance(palabras_clave, list)
 
+    def test_extraer_palabras_clave_error(self):
+        with pytest.raises(KeywordExtractionError):
+            extraer_palabras_clave(123)
+
     def test_analizar_texto(self):
         texto = "Texto de prueba para analizar."
         self.assertIsNone(analizar_texto(texto)) #Debe retornar None porque es un placeholder
@@ -53,4 +57,9 @@ class TestRemo(unittest.TestCase):
       mem = Memoria()
       registrar_interaccion("Prueba", "neutra", "usuario", mem)
       self.assertIsInstance(mem.memoria, dict)
-      self.assertIn("usuario", mem.
+      self.assertIn("usuario", mem.memoria)
+      self.assertEqual(len(mem.memoria["usuario"]),1)
+      self.assertIn("texto", mem.memoria["usuario"][0])
+      self.assertIn("emocion", mem.memoria["usuario"][0])
+if __name__ == '__main__':
+    unittest.main()
