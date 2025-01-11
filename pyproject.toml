@@ -1,21 +1,21 @@
 [tool.poetry]
 name = "romulo-colab"
-version = "0.2.0" #Aumentamos la version
+version = "0.2.0"
 description = "Romulo: Un proyecto de IA para la investigación científica autónoma."
-authors = ["Tu Nombre <tu_correo@ejemplo.com>"]
+authors = ["ProjectRomulo <tu_correo@example.com>"] # Reemplaza con tu correo
 
 [tool.poetry.dependencies]
 python = "^3.7"
-scikit-learn = "^1.2.2" #Ejemplo de versionado
-numpy = "^1.24.3" #Ejemplo de versionado
-scipy = "^1.10.1" #Ejemplo de versionado
-requests = "*"
-beautifulsoup4 = "*"
-sentence-transformers = "*"
-nltk="*""
+scikit-learn = "^1.2.2"
+numpy = "^1.24.3"
+scipy = "^1.10.1"
+requests = "^2.31.0" #Versionamos requests
+beautifulsoup4 = "^4.12.2" #Versionamos beautifulsoup4
+sentence-transformers = "^2.2.2" #Versionamos sentence-transformers
+nltk = "*"
 
-[tool.poetry.group.dev.dependencies] #Seccion de dependencias de desarrollo
-pytest = "*"
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.3.1" #Versionamos pytest
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
