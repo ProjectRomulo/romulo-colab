@@ -2,20 +2,20 @@
 name = "romulo-colab"
 version = "0.2.0"
 description = "Romulo: Un proyecto de IA para la investigación científica autónoma."
-authors = ["ProjectRomulo <tu_correo@example.com>"] # Reemplaza con tu correo
+authors = ["ProjectRomulo <tu_correo@example.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = ">=3.7,<3.11" # Rango de versiones de Python más amplio
 scikit-learn = "^1.2.2"
 numpy = "^1.24.3"
-scipy = "^1.10.1"
-requests = "^2.31.0" #Versionamos requests
-beautifulsoup4 = "^4.12.2" #Versionamos beautifulsoup4
-sentence-transformers = "^2.2.2" #Versionamos sentence-transformers
+scipy = "1.10.1" # Fijar una versión compatible
+requests = "^2.31.0"
+beautifulsoup4 = "^4.12.2"
+sentence-transformers = "^2.2.2"
 nltk = "*"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.3.1" #Versionamos pytest
+pytest = "^7.3.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
