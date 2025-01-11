@@ -19,7 +19,15 @@ class KeywordExtractionError(Exception):
     pass
 
 def similitud_coseno(vec1, vec2):
-    """Calcula la similitud coseno entre dos vectores."""
+    """Calcula la similitud coseno entre dos vectores.
+
+    Args:
+        vec1 (numpy.ndarray): El primer vector.
+        vec2 (numpy.ndarray): El segundo vector.
+
+    Returns:
+        float: La similitud coseno entre los vectores, o None si ocurre un error.
+    """
     try:
         if not isinstance(vec1, np.ndarray) or not isinstance(vec2, np.ndarray):
             raise TypeError("Los argumentos deben ser arrays de NumPy.")
@@ -32,8 +40,21 @@ def similitud_coseno(vec1, vec2):
         print(f"Error en similitud_coseno: {e}")
         return None
 
-def extraer_palabras_clave(texto, use_embeddings=True, embedding_model="all-mpnet-base-v2"):
-    try:
+def extraer_palabras_clave(texto, use_embeddings=True, embedding_model="all-MiniLM-L6-v2"):
+  """Extrae palabras clave de un texto utilizando embeddings o TF-IDF.
+
+    Args:
+        texto (str): El texto del que se extraerán las palabras clave.
+        use_embeddings (bool, opcional): Indica si se deben usar embeddings. Por defecto es True.
+        embedding_model (str, opcional): El modelo de embeddings a utilizar. Por defecto es "all-MiniLM-L6-v2".
+
+    Returns:
+        list or numpy.ndarray: Una lista de tuplas (palabra, score) si se usa TF-IDF, o un array de NumPy con los embeddings si se usan embeddings.
+
+    Raises:
+        KeywordExtractionError: Si ocurre un error durante la extracción.
+    """
+  try:
         stop_words = set(stopwords.words('spanish'))
         lemmatizer = WordNetLemmatizer()
         texto_procesado = ' '.join([lemmatizer.lemmatize(word.lower()) for word in texto.split() if word.lower() not in stop_words])
@@ -58,7 +79,7 @@ def extraer_palabras_clave(texto, use_embeddings=True, embedding_model="all-mpne
                 palabras_clave.append((palabra, score))
             return palabras_clave
 
-    except Exception as e:
+  except Exception as e:
         raise KeywordExtractionError(f"Error al extraer palabras clave: {e}")
 
 def analizar_texto(texto):
