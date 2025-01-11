@@ -14,6 +14,10 @@ try:
 except LookupError:
     nltk.download('stopwords')
 
+class KeywordExtractionError(Exception):
+    """Excepción personalizada para errores en la extracción de palabras clave."""
+    pass
+
 def similitud_coseno(vec1, vec2):
     """Calcula la similitud coseno entre dos vectores."""
     try:
@@ -55,8 +59,7 @@ def extraer_palabras_clave(texto, use_embeddings=True, embedding_model="all-mpne
             return palabras_clave
 
     except Exception as e:
-        print(f"Error al extraer palabras clave: {e}")
-        return []
+        raise KeywordExtractionError(f"Error al extraer palabras clave: {e}")
 
 def analizar_texto(texto):
     print(f"Analizando el texto: {texto}")
